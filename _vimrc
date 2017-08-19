@@ -27,12 +27,23 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 " ファイルオープンを便利に
 NeoBundle 'Shougo/unite.vim'
+
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'
+
 " Ruby向けにendを自動挿入してくれる
 NeoBundle 'tpope/vim-endwise'
+
 " インデントの可視化
 NeoBundle 'Yggdroot/indentLine'
+
+" Gitを便利に使う
+NeoBundle 'tpope/vim-fugitive'
+
+" grep検索の実行後にQuickFix Listを表示する
+autocmd QuickFixCmdPost *grep* cwindow
+" ステータス行に現在のgitブランチを表示する
+set statusline+=%{fugitive#statusline()}
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
