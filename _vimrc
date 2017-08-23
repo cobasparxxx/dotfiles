@@ -40,6 +40,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 " ファイルオープンを便利に
 NeoBundle 'Shougo/unite.vim'
+" Unite file_mruを使用出来るように
+"NeoBundle 'Shougo/neomru'
 
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'
@@ -52,6 +54,9 @@ NeoBundle 'Yggdroot/indentLine'
 
 " Gitを便利に使う
 NeoBundle 'tpope/vim-fugitive'
+
+" 行末のスペースを可視化
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
