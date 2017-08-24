@@ -1,5 +1,4 @@
-syntax on
-set autoindent
+syntax on set autoindent
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -41,7 +40,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " ファイルオープンを便利に
 NeoBundle 'Shougo/unite.vim'
 " Unite file_mruを使用出来るように
-"NeoBundle 'Shougo/neomru'
+NeoBundle 'Shougo/neomru.vim'
 
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'
