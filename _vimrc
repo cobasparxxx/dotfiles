@@ -57,6 +57,9 @@ NeoBundle 'tpope/vim-fugitive'
 " 行末のスペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+" ステータスラインの表示内容強化
+NeoBundle 'itchyny/lightline.vim'
+
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
@@ -85,3 +88,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 " ステータス行に現在のgitブランチを表示する
 set statusline+=%{fugitive#statusline()}
+"----------------------------------------------------------
+" ステータスラインの設定
+"----------------------------------------------------------
+set laststatus=2 " ステータスラインを常に表示
+set showmode " 現在のモードを表示
+set showcmd " 打ったコマンドをステータスラインの下に表示
+set ruler " ステータスラインの右側にカーソルの現在位置を表示する
