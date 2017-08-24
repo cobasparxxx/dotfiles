@@ -75,3 +75,13 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+
+" 各種設定
+" ---------------
+" pope/vim-fugitive
+" ---------------
+" grep検索の実行後にQuickFix Listを表示する
+autocmd QuickFixCmdPost *grep* cwindow
+
+" ステータス行に現在のgitブランチを表示する
+set statusline+=%{fugitive#statusline()}
