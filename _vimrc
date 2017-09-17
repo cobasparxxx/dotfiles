@@ -62,6 +62,9 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 " ステータスラインの表示内容強化
 NeoBundle 'itchyny/lightline.vim'
 
+" gitプラグイン
+NeoBundle 'lambdalisue/gina.vim'
+
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
