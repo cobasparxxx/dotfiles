@@ -20,6 +20,8 @@ if &term =~ "xterm"
   inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
+" 空行を挿入
+nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
 
 " Bundle Scripts-----------------------------
 if &compatible
