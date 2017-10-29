@@ -21,7 +21,7 @@ if &term =~ "xterm"
 endif
 
 " 空行を挿入
-nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
+" nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
 
 " Bundle Scripts-----------------------------
 if &compatible
@@ -64,6 +64,9 @@ NeoBundle 'itchyny/lightline.vim'
 
 " gitプラグイン
 NeoBundle 'lambdalisue/gina.vim'
+
+" Rails向けのコマンドを提供する
+NeoBundle 'tpope/vim-rails'
 
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
