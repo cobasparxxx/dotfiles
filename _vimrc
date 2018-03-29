@@ -5,6 +5,7 @@ set shiftwidth=2
 set cursorline
 set number
 set backspace=indent,eol,start
+set directory-=.
 
 " クリップボードからのペーストをずれないようにする
 if &term =~ "xterm"
