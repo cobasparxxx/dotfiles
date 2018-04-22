@@ -75,6 +75,9 @@ NeoBundle 'Shougo/neocomplete.vim'
 " pluntumlのシンタクスハイライトと:makeコマンド
 NeoBundle "aklt/plantuml-syntax"
 
+" 括弧を便利に編集
+NeoBundle 'surround.vim'
+
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
