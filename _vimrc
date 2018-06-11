@@ -10,7 +10,7 @@ set shiftwidth=2
 " 現在の行を強調表示
 set cursorline
 " 現在の列を強調表示
-set cursorcolumn
+" set cursorcolumn
 " 行番号を表示
 set number
 " backspaceの設定
@@ -40,4 +40,31 @@ if &term =~ "xterm"
   inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
+" ======================================================================
+" dein.vim設定 start
+" =====================================================================
+if &compatible
+ set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
+if dein#load_state('~/.vim/bundles')
+ call dein#begin('~/.vim/bundles')
+
+ call dein#add('~/.vim/bundles')
+ call dein#add('Shougo/deoplete.nvim')
+ if !has('nvim')
+   call dein#add('roxma/nvim-yarp')
+   call dein#add('roxma/vim-hug-neovim-rpc')
+ endif
+
+ call dein#end()
+ call dein#save_state()
+endif
+
+filetype plugin indent on
+syntax enable
+" ======================================================================
+" dein.vim設定 end
+" =====================================================================
