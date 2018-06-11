@@ -9,6 +9,8 @@ set tabstop=2
 set shiftwidth=2
 " 現在の行を強調表示
 set cursorline
+" 現在の列を強調表示
+set cursorcolumn
 " 行番号を表示
 set number
 " backspaceの設定
@@ -37,3 +39,5 @@ if &term =~ "xterm"
 
   inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
+
+
