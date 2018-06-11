@@ -78,6 +78,8 @@ NeoBundle "aklt/plantuml-syntax"
 " 括弧を便利に編集
 NeoBundle 'surround.vim'
 
+NeoBundle 'scrooloose/syntastic'
+
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
@@ -181,6 +183,23 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " ---------------
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
+
+"----------------------------------------------------------
+" Syntasticの設定
+"----------------------------------------------------------
+" 構文エラー行に「>>」を表示
+let g:syntastic_enable_signs = 1
+" 他のVimプラグインと競合するのを防ぐ
+let g:syntastic_always_populate_loc_list = 1
+" 構文エラーリストを非表示
+let g:syntastic_auto_loc_list = 1
+" ファイルを開いた時に構文エラーチェックを実行する
+let g:syntastic_check_on_open = 1
+" 「:wq」で終了する時も構文エラーチェックする
+let g:syntastic_check_on_wq = 0
+" ruby以外は構文エラーチェックをしない
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['ruby'] }
+let g:syntastic_ruby_chekers = ['rubocop']
 
 " ステータス行に現在のgitブランチを表示する
 set statusline+=%{fugitive#statusline()}
