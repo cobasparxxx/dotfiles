@@ -229,7 +229,7 @@ nmap    <Space>u [unite]
 
 nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
 nnoremap <silent> [unite]u :<C-u>Unite<Space>file_rec/git<CR>
-nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 
 "----------------------------------------------------------
 " ステータスラインの設定
