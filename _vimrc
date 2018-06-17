@@ -78,6 +78,16 @@ NeoBundle "aklt/plantuml-syntax"
 " 括弧を便利に編集
 NeoBundle 'surround.vim'
 
+" vimに非同期処理を実装
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
 NeoBundle 'scrooloose/syntastic'
 
 " grep検索の実行後にQuickFix Listを表示する
@@ -205,6 +215,22 @@ let g:syntastic_ruby_chekers = ['rubocop']
 set statusline+=%{fugitive#statusline()}
 " plantumlスクリプトの設定
 let g:plantuml_executable_script="~/dotfiles/plantuml.sh"
+
+"----------------------------------------------------------
+" Unite.vim設定
+"----------------------------------------------------------
+" Uniteを開いた時にinsertモードで開始
+let g:unite_enable_start_insert=1
+let g:unite_source_file_mru_limit = 200
+
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <Space>u [unite]
+
+nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]u :<C-u>Unite<Space>file_rec/git<CR>
+nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
+
 "----------------------------------------------------------
 " ステータスラインの設定
 "----------------------------------------------------------
