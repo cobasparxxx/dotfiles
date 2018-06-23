@@ -90,6 +90,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 NeoBundle 'scrooloose/syntastic'
 
+NeoBundle 'Shougo/unite-outline'
+
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
@@ -250,6 +252,7 @@ nnoremap <silent> [unite]k :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
 nnoremap <silent> [unite]g :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR>
 nnoremap <silent> [unite]cg :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> [unite]u :<C-u>Unite<Space>-no-quit -vertical -winwidth=40 outline<CR>
 
 "----------------------------------------------------------
 " ステータスラインの設定

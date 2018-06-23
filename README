@@ -6,3 +6,5 @@ Manage dotfile.
   - `mkdir tmp`
 - make vimrc symbolic link
   - `ln -s ~/dotfiles/_vimrc ~/.vimrc`
+- install ag
+  - `brew install ag`
