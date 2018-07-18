@@ -1,6 +1,28 @@
-[[plugins]]
-repo = 'Shougo/dein.vim'
-
 [[plugins]] # toml syntax
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
+
+[[plugins]] # NERDTree
+repo = 'scrooloose/nerdtree'
+
+[[plugins]] # 便利
+repo = 'Shougo/unite.vim'
+
+[[plugins]] # file_mruを使えるようにする
+repo = 'Shougo/neomru.vim'
+
+[[plugins]] # rubyでendをつける
+repo = 'tpope/vim-endwise'
+
+[[plugins]] #indent見やすいようにする
+repo = 'Yggdroot/indentLine'
+
+[[plugins]] # 行末のスペースを可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # uniteでoutlineを表示
+repo = 'Shougo/unite-outline'
+
+[[plugins]] # 非同期処理を実現
+repo = 'Shougo/vimproc.vim'
+build = 'make'
