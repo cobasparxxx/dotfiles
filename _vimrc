@@ -42,6 +42,45 @@ endif
 " dein.vim設定 end
 " =====================================================================
 
+" ======================================================================
+" Unite.vim設定 start
+" =====================================================================
+" Uniteを開いた時にinsertモードで開始
+let g:unite_enable_start_insert=1
+let g:unite_source_file_mru_limit = 200
+let g:unite_source_history_yank_enable =1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <Space>j [unite]
+
+nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]j :<C-u>Unite<Space>file_rec/git<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]k :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
+nnoremap <silent> [unite]cg :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]g :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> [unite]u :<C-u>Unite<Space>-no-quit -vertical -winwidth=40 outline<CR>
+" ======================================================================
+" Unite.vim設定 end
+" =====================================================================
+
 syntax on
 " 自動インデントモードに
 set autoindent

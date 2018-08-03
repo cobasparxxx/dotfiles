@@ -26,3 +26,12 @@ repo = 'Shougo/unite-outline'
 [[plugins]] # 非同期処理を実現
 repo = 'Shougo/vimproc.vim'
 build = 'make'
+
+[[plugins]] # 行末のスペースを可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # ステータスラインの表示内容強化
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # Rails向けのコマンドを提供する
+repo = 'tpope/vim-rails'
