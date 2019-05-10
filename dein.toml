@@ -35,3 +35,13 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]] # Rails向けのコマンドを提供する
 repo = 'tpope/vim-rails'
+
+# slimのシンタックスハイライト
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
+
+# ES6のシンタックスハイライト
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascript']
