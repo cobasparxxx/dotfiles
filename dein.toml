@@ -1,0 +1,55 @@
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]] # NERDTree
+repo = 'scrooloose/nerdtree'
+
+[[plugins]] # 便利
+repo = 'Shougo/unite.vim'
+
+[[plugins]] # file_mruを使えるようにする
+repo = 'Shougo/neomru.vim'
+
+[[plugins]] # rubyでendをつける
+repo = 'tpope/vim-endwise'
+
+[[plugins]] #indent見やすいようにする
+repo = 'Yggdroot/indentLine'
+
+[[plugins]] # 行末のスペースを可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # uniteでoutlineを表示
+repo = 'Shougo/unite-outline'
+
+[[plugins]] # 非同期処理を実現
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]] # 行末のスペースを可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # ステータスラインの表示内容強化
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # Rails向けのコマンドを提供する
+repo = 'tpope/vim-rails'
+
+# slimのシンタックスハイライト
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
+
+# ES6のシンタックスハイライト
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascript']
+
+# コード補完
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+
+# git操作※主にgit grepのため
+[[plugins]]
+repo = 'tpope/vim-fugitive'

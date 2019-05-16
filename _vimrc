@@ -1,120 +1,89 @@
-syntax on set autoindent
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set cursorline
-set number
-set backspace=indent,eol,start
-set directory-=.
-
-" クリップボードからのペーストをずれないようにする
-if &term =~ "xterm"
-  let &t_SI .= "\e[?2004h"
-  let &t_EI .= "\e[?2004l"
-  let &pastetoggle = "\e[201~"
-
-  function XTermPasteBegin(ret)
-      set paste
-      return a:ret
-  endfunction
-
-  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+" ======================================================================
+" dein.vim設定 start
+" =====================================================================
+if !&compatible
+  set nocompatible
 endif
 
-" 空行を挿入
-" nnoremap o :<C-u>call append(expand('.'), '')<Cr>j
+" reset augroup
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
-" Bundle Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
+" dein settings {{{
+" dein自体の自動インストール
+let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.vim') : $XDG_CACHE_HOME
+let s:dein_dir = s:cache_home . '/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+endif
+let &runtimepath = s:dein_repo_dir .",". &runtimepath
+" プラグイン読み込み＆キャッシュ作成
+let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dotfiles/dein.toml'
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
+  call dein#load_toml(s:toml_file)
+  call dein#end()
+  call dein#save_state()
+endif
+" 不足プラグインの自動インストール
+if has('vim_starting') && dein#check_install()
+  call dein#install()
+endif
+" }}}
+
+" 引数なしでvimを開くとNERDTreeを起動
+let file_name = expand('%')
+if has('vim_starting') &&  file_name == ''
+  autocmd VimEnter * NERDTree ./
+endif
+" ======================================================================
+" dein.vim設定 end
+" =====================================================================
+
+" ======================================================================
+" Unite.vim設定 start
+" =====================================================================
+" Uniteを開いた時にinsertモードで開始
+let g:unite_enable_start_insert=1
+let g:unite_source_file_mru_limit = 200
+let g:unite_source_history_yank_enable =1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
 endif
 
-" Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    <Space>j [unite]
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]j :<C-u>Unite<Space>file_rec/git<CR>
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]k :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
+nnoremap <silent> [unite]cg :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> [unite]g :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+nnoremap <silent> [unite]u :<C-u>Unite<Space>-no-quit -vertical -winwidth=40 outline<CR>
+" ======================================================================
+" Unite.vim設定 end
+" =====================================================================
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-" ファイルオープンを便利に
-NeoBundle 'Shougo/unite.vim'
-" Unite file_mruを使用出来るように
-NeoBundle 'Shougo/neomru.vim'
-
-" ファイルをtree表示してくれる
-NeoBundle 'scrooloose/nerdtree'
-
-" Ruby向けにendを自動挿入してくれる
-NeoBundle 'tpope/vim-endwise'
-
-" インデントの可視化
-NeoBundle 'Yggdroot/indentLine'
-
-" Gitを便利に使う
-NeoBundle 'tpope/vim-fugitive'
-
-" 行末のスペースを可視化
-NeoBundle 'bronson/vim-trailing-whitespace'
-
-" ステータスラインの表示内容強化
-NeoBundle 'itchyny/lightline.vim'
-
-" gitプラグイン
-NeoBundle 'lambdalisue/gina.vim'
-
-" Rails向けのコマンドを提供する
-NeoBundle 'tpope/vim-rails'
-
-" 自動補完機能
-NeoBundle 'Shougo/neocomplete.vim'
-
-" pluntumlのシンタクスハイライトと:makeコマンド
-NeoBundle "aklt/plantuml-syntax"
-
-" 括弧を便利に編集
-NeoBundle 'surround.vim'
-
-" vimに非同期処理を実装
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-NeoBundle 'scrooloose/syntastic'
-
-NeoBundle 'Shougo/unite-outline'
-
-" grep検索の実行後にQuickFix Listを表示する
-autocmd QuickFixCmdPost *grep* cwindow
-" ステータス行に現在のgitブランチを表示する
-set statusline+=%{fugitive#statusline()}
-
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-
-" Required:
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
-
-
-"  -----------------------------------------------------
-"  neocomplete設定
-"  ----------------------------------------------------
+" ======================================================================
+" neocompleteの設定 start
+" =====================================================================
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -123,7 +92,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -173,91 +141,60 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" ======================================================================
+" neocompleteの設定 end
+" =====================================================================
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-" end neocomplet
-" --------------------------------------------------------------
-
-
-" 各種設定
-" ---------------
-" pope/vim-fugitive
-" ---------------
+" ======================================================================
+" vim-fugitiveの設定 start
+" =====================================================================
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
-
-"----------------------------------------------------------
-" Syntasticの設定
-"----------------------------------------------------------
-" 構文エラー行に「>>」を表示
-let g:syntastic_enable_signs = 1
-" 他のVimプラグインと競合するのを防ぐ
-let g:syntastic_always_populate_loc_list = 1
-" 構文エラーリストを非表示
-let g:syntastic_auto_loc_list = 1
-" ファイルを開いた時に構文エラーチェックを実行する
-let g:syntastic_check_on_open = 1
-" 「:wq」で終了する時も構文エラーチェックする
-let g:syntastic_check_on_wq = 0
-" ruby以外は構文エラーチェックをしない
-let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['ruby'] }
-let g:syntastic_ruby_chekers = ['rubocop']
-
 " ステータス行に現在のgitブランチを表示する
 set statusline+=%{fugitive#statusline()}
-" plantumlスクリプトの設定
-let g:plantuml_executable_script="~/dotfiles/plantuml.sh"
+" ======================================================================
+" vim-fugitiveの設定 end
+" =====================================================================
 
-"----------------------------------------------------------
-" Unite.vim設定
-"----------------------------------------------------------
-" Uniteを開いた時にinsertモードで開始
-let g:unite_enable_start_insert=1
-let g:unite_source_file_mru_limit = 200
-let g:unite_source_history_yank_enable =1
 
-" 大文字小文字を区別しない
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
+syntax on
+" 自動インデントモードに
+set autoindent
+" Tab文字を半角スペースにする
+set expandtab
+" 行頭以外のTab文字の表示幅（スペースいくつ分）
+set tabstop=2
+" 行頭でのTab文字の表示幅
+set shiftwidth=2
+" 現在の行を強調表示
+set cursorline
+" 現在の列を強調表示
+" set cursorcolumn
+" 行番号を表示
+set number
+" backspaceの設定
+set backspace=indent,eol,start
+" ~/tmp以下に.swpを作成
+set directory-=.
+" ステータスラインを常に表示
+set laststatus=2
+" 現在のモードを表示
+set showmode
+" 打ったコマンドをステータスラインの下に表示
+set showcmd
+" ステータスラインの右側にカーソルの現在位置を表示する
+set ruler
 
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" クリップボードからのペーストをずれないようにする
+if &term =~ "xterm"
+  let &t_SI .= "\e[?2004h"
+  let &t_EI .= "\e[?2004l"
+  let &pastetoggle = "\e[201~"
 
-" unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
+  function XTermPasteBegin(ret)
+      set paste
+      return a:ret
+  endfunction
+
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
-
-" The prefix key.
-nnoremap    [unite]   <Nop>
-nmap    <Space>j [unite]
-
-nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]j :<C-u>Unite<Space>file_rec/git<CR>
-nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> [unite]k :<C-u>Unite<Space>bookmark<CR>
-nnoremap <silent> [unite]y :<C-u>Unite<Space>history/yank<CR>
-nnoremap <silent> [unite]g :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR>
-nnoremap <silent> [unite]cg :<C-u>Unite<Space>grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-nnoremap <silent> [unite]u :<C-u>Unite<Space>-no-quit -vertical -winwidth=40 outline<CR>
-
-"----------------------------------------------------------
-" ステータスラインの設定
-"----------------------------------------------------------
-set laststatus=2 " ステータスラインを常に表示
-set showmode " 現在のモードを表示
-set showcmd " 打ったコマンドをステータスラインの下に表示
-set ruler " ステータスラインの右側にカーソルの現在位置を表示する
