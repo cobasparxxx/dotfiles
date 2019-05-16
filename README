@@ -1,2 +1,10 @@
 Manage dotfile.
 
+# vimrc
+## initialization
+- make swp-file directory
+  - `mkdir tmp`
+- make vimrc symbolic link
+  - `ln -s ~/dotfiles/_vimrc ~/.vimrc`
+- install ag
+  - `brew install ag`
