@@ -17,6 +17,7 @@ brew "jpeg"
 brew "jp"
 brew "curl"
 brew "git"
+brew "ag"
 
 cask "iterm2"
 cask "alfred"
@@ -27,3 +28,5 @@ cask "licecap"
 cask "sequel-pro"
 cask "skitch"
 cask "visual-studio-code"
+cask "slack"
+cask 'google-chrome'
