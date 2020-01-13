@@ -29,4 +29,5 @@ cask "sequel-pro"
 cask "skitch"
 cask "visual-studio-code"
 cask "slack"
-cask 'google-chrome'
+cask "google-chrome"
+cask "docker"
