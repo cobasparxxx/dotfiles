@@ -184,6 +184,10 @@ set showmode
 set showcmd
 " ステータスラインの右側にカーソルの現在位置を表示する
 set ruler
+" 前回の検索パターンが存在するとき、それにマッチするテキストを全て強調表示する。
+set hlsearch
+" インクリメンタルサーチ
+set incsearch
 
 " クリップボードからのペーストをずれないようにする
 if &term =~ "xterm"
