@@ -18,6 +18,8 @@ brew "jp"
 brew "curl"
 brew "git"
 brew "ag"
+brew "nodenv"
+brew "awscli"
 
 cask "iterm2"
 cask "alfred"
